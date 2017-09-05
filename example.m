@@ -11,4 +11,4 @@ title('hist2(z,-2,2) Example')
 figure(2)
 x = z*.2 + exp(z)*.4;
 hist2(x,0,3)
-title('hist2(x,-1,3) Example')
+title('hist2(x,0,3) Example')
