@@ -1,6 +1,7 @@
 function [h p1 p2 p3] = hist2(x, a, b)
-% This function is a histogram plus the cummulative distributions between
+% This function is a histogram plus the cumulative distributions between
 % critical points a and b.
+%
 %   [h p1 p2 p3] = hist2(x, a, b)
 %       h : Handle to the plot
 %       p1: Percentage of observations which are <= a
@@ -14,6 +15,8 @@ function [h p1 p2 p3] = hist2(x, a, b)
 %   Example: 
 %       x = randn(1000,1);
 %       [h p1 p2 p3] = hist2(x, -1.67, 2.33)
+%
+% More info at github.com/ghasimi/hist2
 
 % Handling of inputs ----------------------------------------------
 if (nargin == 1)
@@ -43,13 +46,13 @@ pL = sum(x<=a)/n*100;
 pR = 100 - sum(x<=b)/n*100;
 
 % Color and Formats
-MC1  = 'w';
+MC1  = 'w'; % text color of the middle area
 MC2  = 'k';
-C1 = [0 .6 1];
+C1 = [0 .6 1]; % background color of the middle area 
 C2 = [1 1 1];
-C3 = [1 1 1];
-fAlpha = 0.6;
-e = 0.065;
+C3 = [1 1 1]; % color for masking the left and right areas of the histogram
+fAlpha = 0.6; % transparency for masking the left and right areas of the histogram
+e = 0.065; % threshold below which the percentages are not shown on the histogram 
 
 % Histogram and numerical outputs ---------------------------------
 
@@ -79,7 +82,7 @@ line([a a],[0 pa.YLim(2)*.95],'Color','k','LineStyle','--')
 line([b b],[0 pa.YLim(2)*.95],'Color','k','LineStyle','--')
 
 
-% L - Left-side cummulative distribution
+% L - Left-side cumulative distribution
 ox = p(1);
 ow = (L/W)*p(3);
 
@@ -98,7 +101,7 @@ an.Color = MC2;
 an.HorizontalAlignment = 'center';
 an.VerticalAlignment = 'middle';
 
-% R - Right-side cummulative distribution
+% R - Right-side cumulative distribution
 ox = p(1)+(R/W)*p(3);
 ow = ((W-R)/W)*p(3);
 
@@ -119,7 +122,7 @@ an.Color = MC2;
 an.HorizontalAlignment = 'center';
 an.VerticalAlignment = 'middle';
 
-% M - Middle cummulative distribution
+% M - Middle cumulative distribution
 ox = p(1) + (L/W)*p(3);
 ow = ((R-L)/W)*p(3);
 dim = [ox oy ow oh];
@@ -137,7 +140,7 @@ an.HorizontalAlignment = 'center';
 an.VerticalAlignment = 'middle';
 pa.YLim(2) = pa.YLim(2)*1.05;
 
-% Tick labels for the cummulative distribution --------------------
+% Tick labels for the cumulative distribution --------------------
 oy = p(4) + p(2) - 1.2*oh;
 
 % Lower point
